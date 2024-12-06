@@ -17,26 +17,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
+      # Step 2: Set up Node.js with npm
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20.12.1
-          cache: pnpm
+          cache: npm
 
-      # Step 3: Install pnpm globally
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      # Step 4: Check pnpm version to confirm installation
-      - name: Check pnpm version
-        run: pnpm --version
-
-      # Step 5: Install Dependencies with pnpm
+      # Step 3: Install dependencies using npm
       - name: Install Dependencies
-        run: pnpm install
+        run: npm install
 
-      # Step 6: Run Semantic Release
+      # Step 4: Run Semantic Release
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
