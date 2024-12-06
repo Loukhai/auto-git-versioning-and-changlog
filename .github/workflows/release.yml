@@ -13,23 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
+      # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js with npm
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: npm
+          node-version: 20.12.1
+          cache: "pnpm" # Enables pnpm cache
 
-      # Step 3: Install dependencies using npm
+      # Step 3: Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 4: Install Dependencies with pnpm
       - name: Install Dependencies
-        run: npm install
+        run: pnpm install
 
-      # Step 4: Run Semantic Release
+      # Step 5: Run Semantic Release
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+        run: pnpm exec semantic-release
