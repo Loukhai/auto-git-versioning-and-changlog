@@ -24,16 +24,19 @@ jobs:
           node-version: 20.12.1
           cache: pnpm
 
-      # Step 3: Install pnpm explicitly
+      # Step 3: Install pnpm globally
       - name: Install pnpm
-        run: |
-          npm install -g pnpm
+        run: npm install -g pnpm
 
-      # Step 4: Install Dependencies with pnpm
+      # Step 4: Check pnpm version to confirm installation
+      - name: Check pnpm version
+        run: pnpm --version
+
+      # Step 5: Install Dependencies with pnpm
       - name: Install Dependencies
         run: pnpm install
 
-      # Step 5: Run Semantic Release
+      # Step 6: Run Semantic Release
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
