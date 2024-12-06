@@ -18,13 +18,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20.12.1
+          cache: "pnpm" # Enable pnpm cache
 
       # Step 3: Install Dependencies
       - name: Install Dependencies
-        run: npm install
+        run: pnpm install
 
       # Step 4: Run Semantic Release
       - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+        run: pnpm exec semantic-release
