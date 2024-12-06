@@ -1,32 +1,37 @@
-name: Release Workflow
+name: Release
 
 on:
   push:
     branches:
       - main
+      - develop
+      - "feat/*"
 
 jobs:
   release:
+    name: Semantic Release
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout Code
+      # Step 1: Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js and pnpm
-      - name: Setup Node.js and Enable pnpm
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20.12.1
-          cache: 'pnpm'
-      - run: corepack enable # Enable pnpm via Corepack (Node.js >=16.10)
+          node-version: 20.8.1
+          cache: "pnpm"
 
-      # Step 3: Install Dependencies
+      # Step 3: Install dependencies
       - name: Install Dependencies
-        run: pnpm install
+        run: |
+          corepack enable
+          pnpm install
 
       # Step 4: Run Semantic Release
-      - name: Semantic Release
+      - name: Run Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm exec semantic-release
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
+        run: npx semantic-release
