@@ -13,12 +13,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
-      - name: Setup Node.js
+      # Step 2: Setup Node.js and pnpm
+      - name: Setup Node.js and Enable pnpm
         uses: actions/setup-node@v3
         with:
           node-version: 20.12.1
-          cache: "pnpm" # Enable pnpm cache
+          cache: 'pnpm'
+      - run: corepack enable # Enable pnpm via Corepack (Node.js >=16.10)
 
       # Step 3: Install Dependencies
       - name: Install Dependencies
