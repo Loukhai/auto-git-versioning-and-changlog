@@ -24,11 +24,10 @@ jobs:
           node-version: 20.12.1
           cache: pnpm
 
-      # Step 3: Enable Corepack and Install pnpm
-      - name: Enable Corepack and Install pnpm
+      # Step 3: Install pnpm explicitly
+      - name: Install pnpm
         run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+          npm install -g pnpm
 
       # Step 4: Install Dependencies with pnpm
       - name: Install Dependencies
