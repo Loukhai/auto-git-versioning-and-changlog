@@ -30,6 +30,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Validate Dependencies
+        run: npm ci
+
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
